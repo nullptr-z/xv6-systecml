@@ -1,5 +1,5 @@
 
-user/initcode.o:     file format elf64-littleriscv
+user/initcode.o：     文件格式 elf64-littleriscv
 
 
 Disassembly of section .text:
@@ -33,9 +33,9 @@ exit:
   20:	ff9ff0ef          	jal	ra,18 <exit>
 
 0000000000000024 <init>:
-  24:	696e692f          	0x696e692f
-  28:	0074                	addi	a3,sp,12
-	...
+  24:	696e692f          	.word	0x696e692f
+  28:	           	地址 0x0000000000000028 越界。
+
 
 000000000000002b <argv>:
 	...
