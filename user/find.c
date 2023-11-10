@@ -4,16 +4,26 @@
 #include "user/user.h"
 #include "kernel/fs.h"
 
-int main(int argc, char *args[])
+char *fmtname(char *path)
 {
-  if (argc < 2)
-  {
-    printf("less than 2 parameters");
-    return -1;
-  }
-  printf("args[2] %s", args[2]);
+  static char buf[DIRSIZ + 1];
+  char *p;
 
-  char *path = args[1];
+  // Find first character after last slash.
+  for (p = path + strlen(path); p >= path && *p != '/'; p--)
+    ;
+  p++;
+
+  // Return blank-padded name.
+  if (strlen(p) >= DIRSIZ)
+    return p;
+  memmove(buf, p, strlen(p));
+  memset(buf + strlen(p), 0, DIRSIZ - strlen(p));
+  return buf;
+}
+
+int find(char *path, char *target)
+{
   char buf[512], *p;
   int fd;
   struct dirent de;
@@ -54,21 +64,30 @@ int main(int argc, char *args[])
         printf("ls: cannot stat %s\n", buf);
         continue;
       }
-      char *c = args[2];
-      strcpy(c, path);
 
-      int q = strcmp(buf, c);
-      printf("compare: %s  %d\n", c, q);
-      if (q > 0)
-      {
-        printf("file: %s  %d\n", buf, q);
-      }
+      char *fmt_buf = fmtname(buf);
+      if (!strcmp(fmt_buf, target))
+        printf("%s\n", buf);
+      else if (strcmp(fmt_buf, ".") && strcmp(fmt_buf, ".."))
+        find(buf, target);
     }
     break;
+  }
+  close(fd);
 
-  default:
-    fprintf(2, "find: file type does not exist %s\n", path);
-    break;
+  return 0;
+}
+
+int main(int argc, char *args[])
+{
+  if (argc == 2)
+  {
+    find(".", args[1]);
+  }
+  else if (argc == 3)
+  {
+    // printf("args[2] %s\n\n", args[2]);
+    find(args[1], args[2]);
   }
 
   return 0;
