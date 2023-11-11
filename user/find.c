@@ -90,5 +90,5 @@ int main(int argc, char *args[])
     find(args[1], args[2]);
   }
 
-  return 0;
+  exit(0);
 }
