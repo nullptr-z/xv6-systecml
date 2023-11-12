@@ -5,10 +5,10 @@
 .section .text
 .global _entry
 _entry:
-	# set up a stack for C.
-        # stack0 is declared in start.c,
-        # with a 4096-byte stack per CPU.
-        # sp = stack0 + (hartid * 4096)
+	# set up a stack for C.                 为C建立一个堆栈。
+        # stack0 is declared in start.c,        stack0 在 start.c 中声明，
+        # with a 4096-byte stack per CPU.       每个 CPU 有 4096 字节的堆栈。
+        # sp = stack0 + (hartid * 4096)         sp = stack0 + (hartid * 4096)
         la sp, stack0
         li a0, 1024*4
 	csrr a1, mhartid

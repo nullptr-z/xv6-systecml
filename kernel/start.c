@@ -17,6 +17,7 @@ uint64 timer_scratch[NCPU][5];
 extern void timervec();
 
 // entry.S jumps here in machine mode on stack0.
+// entry.S 在 stack0 上以机器模式跳转到这里来。
 void
 start()
 {
