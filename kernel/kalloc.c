@@ -51,7 +51,7 @@ kfree(void *pa)
   if(((uint64)pa % PGSIZE) != 0 || (char*)pa < end || (uint64)pa >= PHYSTOP)
     panic("kfree");
 
-  // Fill with junk to catch dangling refs.
+  // Fill with junk to catch dangling refs. 将被释放的内存中的每个字节设置为1
   memset(pa, 1, PGSIZE);
 
   r = (struct run*)pa;

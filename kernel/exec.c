@@ -107,7 +107,7 @@ exec(char *path, char **argv)
     if(*s == '/')
       last = s+1;
   safestrcpy(p->name, last, sizeof(p->name));
-    
+
   // Commit to the user image.
   oldpagetable = p->pagetable;
   p->pagetable = pagetable;
@@ -132,6 +132,10 @@ exec(char *path, char **argv)
 // va must be page-aligned
 // and the pages from va to va+sz must already be mapped.
 // Returns 0 on success, -1 on failure.
+// 将程序段加载到虚拟地址 va 处的页表中。
+// va 必须页对齐
+// 并且从 va 到 va+sz 的页面必须已经被映射。
+// 成功返回0，失败返回-1。
 static int
 loadseg(pagetable_t pagetable, uint64 va, struct inode *ip, uint offset, uint sz)
 {
@@ -149,6 +153,6 @@ loadseg(pagetable_t pagetable, uint64 va, struct inode *ip, uint offset, uint sz
     if(readi(ip, 0, (uint64)pa, offset+i, n) != n)
       return -1;
   }
-  
+
   return 0;
 }
