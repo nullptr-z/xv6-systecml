@@ -76,5 +76,6 @@
 struct usyscall
 {
   int pid; // Process ID
+  // uint64 mask; //
 };
 // #endif
