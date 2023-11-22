@@ -125,9 +125,7 @@ int sys_pgaccess(void)
     uint64 va = first_va + i * PGSIZE;
     pde_t *pte = walk(pt, va, 0);
     if (!pte)
-    {
       continue;
-    }
 
     if (*pte & PTE_A)
     {
