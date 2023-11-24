@@ -53,7 +53,7 @@ usertrap(void)
   if(r_scause() == 8){
     // system call
 
-    if(p->killed)
+    if(p->killed) // 检查进程是否被杀掉
       exit(-1);
 
     // sepc points to the ecall instruction,
