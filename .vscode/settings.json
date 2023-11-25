@@ -1,0 +1,19 @@
+{
+  "files.associations": {
+    "*.vue": "vue",
+    "*.js": "javascript",
+    "*.toml": "toml",
+    "*.rs": "rust",
+    "*.graphql": "graphql",
+    "*.rs ": "rust",
+    "*.json": "jsonc",
+    "*.proto": "proto3",
+    "*.jsx": "javascript",
+    "*.text": "tex",
+    "*.tsx": "typescriptreact",
+    "*.ts": "typescript",
+    "*.c": "c",
+    "defs.h": "c",
+    "riscv.h": "c"
+  }
+}
