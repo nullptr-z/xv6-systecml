@@ -72,10 +72,11 @@ void usertrap(void)
   else if ((which_dev = devintr()) != 0)
   {
     // ok
-    if (p->tick_limit > 0 && which_dev == 2)
+    if (which_dev == 2 && p->callback_action != 1 && p->tick_limit > 0)
     {
       if (!(--p->tick_count))
       {
+        p->callback_action = 1;
         p->tick_count = p->tick_limit;
         uint64 fn = p->tick_callback;
         p->pc = p->trapframe->epc;

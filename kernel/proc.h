@@ -124,4 +124,5 @@ struct proc
   uint64 tick_callback;
   uint64 pc;
   struct trapframe trapframes;
+  uint64 callback_action;
 };

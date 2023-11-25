@@ -107,6 +107,7 @@ uint64 sys_sigreturn(void)
 
   memmove(p->trapframe, &p->trapframes, sizeof(struct trapframe));
   p->trapframe->epc = p->pc;
+  p->callback_action = 0;
 
   return 0;
 }
@@ -114,12 +115,12 @@ uint64 sys_sigreturn(void)
 // int sigalarm(int ticks, void (*handler)());
 uint64 sys_sigalarm(void)
 {
+  struct proc *p = myproc();
+
   int ticks;
   uint64 callback;
   argint(0, &ticks);
   argaddr(1, &callback);
-
-  struct proc *p = myproc();
 
   p->tick_limit = ticks;
   p->tick_count = ticks;
