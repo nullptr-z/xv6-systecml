@@ -186,7 +186,7 @@ void clockintr()
 }
 
 // check if it's an external interrupt or software interrupt,
-// and handle it.
+// and handle it. 2定时器，1硬件中断，设备，0未识别
 // returns 2 if timer interrupt,
 // 1 if other device,
 // 0 if not recognized.

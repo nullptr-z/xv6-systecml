@@ -489,7 +489,7 @@ void scheduler(void)
 // kernel thread, not this CPU. It should
 // be proc->intena and proc->noff, but that would
 // break in the few places where a lock is held but
-// there's no process.
+// there's no process.  没有太多意义，解决一些历史遗留问题
 void sched(void)
 {
   int intena;
